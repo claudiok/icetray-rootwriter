@@ -9,7 +9,7 @@
  * @author Fabian Kislat <fabian.kislat@desy.de> Last changed by: $LastChangedBy$
  */
 
-#include "rootwriter/I3ROOTWriterService.h"
+#include "rootwriter/I3ROOTTableService.h"
 #include "rootwriter/I3ROOTTable.h"
 
 I3ROOTTableService::I3ROOTTableService(const std::string &filename, int compress,
