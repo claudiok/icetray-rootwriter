@@ -32,7 +32,7 @@ I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
       "Number of objects in each field";
     counter_ = I3ROOTBranchWrapper(tree_,
 				   I3Datatype(I3Datatype::Int,
-					      sizeof(unsigned long long int),
+					      sizeof(uint64_t),
 					      false),
 				   countername, counterdescription, 0);
     counterwrapper = &counter_;
@@ -59,7 +59,7 @@ I3ROOTTable::~I3ROOTTable() {}
 
 void I3ROOTTable::WriteRows(I3TableRowConstPtr rows) {
   if (multirow_) {
-    counter_.Fill((unsigned long long int)rows->GetNumberOfRows());
+    counter_.Fill((uint64_t)rows->GetNumberOfRows());
   }
 
   BOOST_FOREACH(I3ROOTBranchWrapper branch, branches_) {
