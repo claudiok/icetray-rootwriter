@@ -16,7 +16,7 @@ if(USE_ROOT)
     # add all the projects needed, in particular those needed by the converters
     USE_PROJECTS icetray dataclasses tableio)
 
-  #add_subdirectory(private/pybindings)
+  add_subdirectory(private/pybindings)
 
   #i3_test_executable(test 
   #  private/test/*.cxx

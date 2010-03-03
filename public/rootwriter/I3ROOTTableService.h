@@ -14,7 +14,9 @@
 
 #include "tableio/internals/I3TableService.h"
 
-#include <TFile.h>
+#include <boost/shared_ptr.hpp>
+
+class TFile;
 
 
 class I3ROOTTableService : public I3TableService {
@@ -29,7 +31,7 @@ protected:
   virtual void CloseFile();
   
 private:
-  TFile file_;
+  boost::shared_ptr<TFile> file_;
   
   SET_LOGGER("I3ROOTTableService");
 };

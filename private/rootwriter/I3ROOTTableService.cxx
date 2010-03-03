@@ -12,14 +12,17 @@
 #include "rootwriter/I3ROOTTableService.h"
 #include "rootwriter/I3ROOTTable.h"
 
+#include <TFile.h>
+
+
 I3ROOTTableService::I3ROOTTableService(const std::string &filename, int compress,
 				       const std::string &mode)
-  : I3TableService(), file_(filename.c_str(), mode.c_str(), "", compress)
+  : I3TableService(), file_(new TFile(filename.c_str(), mode.c_str(), "", compress))
 {
-  if (!file_.IsOpen())
+  if (!file_->IsOpen())
     log_fatal("Cannot open file %s", filename.c_str());
 
-  file_.cd();
+  file_->cd();
 }
 
 I3ROOTTableService::~I3ROOTTableService() {}
@@ -33,7 +36,7 @@ I3TablePtr I3ROOTTableService::CreateTable(const std::string &tableName,
 void I3ROOTTableService::CloseFile()
 {
   log_warn("Closing '%s'. Did I want to do some sanity checks first?",
-	   file_.GetName());
-  file_.Write();
-  file_.Close();
+	   file_->GetName());
+  file_->Write();
+  file_->Close();
 }
