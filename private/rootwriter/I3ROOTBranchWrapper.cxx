@@ -118,7 +118,8 @@ I3ROOTBranchWrapper::I3ROOTBranchWrapper(TTree *tree, const I3Datatype &type,
 
 I3ROOTBranchWrapper::I3ROOTBranchWrapper(const I3ROOTBranchWrapper &rhs)
   : tree_(rhs.tree_), branch_(rhs.branch_), index_(rhs.index_),
-    multirow_(rhs.multirow_), datasize_(rhs.datasize_), data_(rhs.data_)
+    arrayLength_(rhs.arrayLength_), multirow_(rhs.multirow_),
+    datasize_(rhs.datasize_), data_(rhs.data_)
 {}
 
 I3ROOTBranchWrapper::~I3ROOTBranchWrapper()
@@ -127,7 +128,7 @@ I3ROOTBranchWrapper::~I3ROOTBranchWrapper()
 void I3ROOTBranchWrapper::Fill(const I3TableRowConstPtr &data)
 {
   // make sure we have enough room to store all elements
-  if (data->GetNumberOfRows() > data_->size()*datasize_*arrayLength_) {
+  if (data->GetNumberOfRows()*datasize_*arrayLength_ > data_->size()) {
     char *olddata = &(data_->at(0));
     data_->resize(data->GetNumberOfRows()*datasize_*arrayLength_);
     if (olddata != &(data_->at(0))) {
