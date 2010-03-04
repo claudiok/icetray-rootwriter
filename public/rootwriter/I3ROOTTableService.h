@@ -15,8 +15,10 @@
 #include "tableio/internals/I3TableService.h"
 
 #include <boost/shared_ptr.hpp>
+#include <vector>
 
 class TFile;
+class I3ROOTTable;
 
 
 class I3ROOTTableService : public I3TableService {
@@ -32,6 +34,7 @@ protected:
   
 private:
   boost::shared_ptr<TFile> file_;
+  std::vector< boost::shared_ptr<I3ROOTTable> > tables_;
   
   SET_LOGGER("I3ROOTTableService");
 };

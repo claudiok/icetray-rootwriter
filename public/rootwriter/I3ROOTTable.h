@@ -30,6 +30,9 @@ public:
   I3ROOTTable(I3TableService& service, const std::string& name,
 	      I3TableRowDescriptionConstPtr description);
   virtual ~I3ROOTTable();
+
+  void Write();
+
 protected:
   virtual void WriteRows(I3TableRowConstPtr row);
   virtual I3Table::AlignmentType GetAlignmentType();
@@ -42,5 +45,7 @@ private:
 
   SET_LOGGER("I3ROOTTable");
 };
+
+I3_POINTER_TYPEDEFS( I3ROOTTable );
 
 #endif
