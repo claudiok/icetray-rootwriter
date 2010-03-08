@@ -24,6 +24,8 @@
 #include <cctype>
 #include <cstring>
 
+#include <iostream>
+
 
 char I3DatatypeToROOTType(const I3Datatype &type)
 {
@@ -89,22 +91,17 @@ I3ROOTBranchWrapper::I3ROOTBranchWrapper(TTree *tree, const I3Datatype &type,
   data_->resize(datasize_*arrayLength_);
 
   // generate description of the array length
-#warning TODO: Find a nicer way to do this
-  if ((arrayLength_ > 1) || multirow_) {
-    leafdescription.push_back('[');
-  }
-  if (arrayLength_ > 1) {
-    leafdescription.append(boost::lexical_cast<std::string>(arrayLength_));
-  }
-  if ((arrayLength_ > 1) && multirow_) {
-    leafdescription.push_back('*');
-  }
   if (multirow_) {
+    leafdescription.push_back('[');
     leafdescription.append(counter->branch_->GetName());
-  }
-  if ((arrayLength_ > 1) || multirow_) {
     leafdescription.push_back(']');
   }
+  if (arrayLength_ > 1) {
+    leafdescription.push_back('[');
+    leafdescription.append(boost::lexical_cast<std::string>(arrayLength_));
+    leafdescription.push_back(']');
+  }
+  std::cout << leafdescription << std::endl;
 
   // generate the type of the field
   leafdescription.push_back('/');

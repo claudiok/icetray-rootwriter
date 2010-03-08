@@ -18,9 +18,10 @@ if(USE_ROOT)
 
   add_subdirectory(private/pybindings)
 
-  #i3_test_executable(test 
-  #  private/test/*.cxx
-  #  USE_PROJECTS dataclasses icetray phys-services hdfwriter tableio)
+  i3_test_executable(test 
+    private/test/*.cxx
+    USE_TOOLS root
+    USE_PROJECTS dataclasses icetray phys-services rootwriter tableio)
 
 
 else(USE_ROOT)
