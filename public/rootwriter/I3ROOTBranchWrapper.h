@@ -48,7 +48,6 @@ public:
       }
     }
     *(reinterpret_cast<T*>(&data_->at(0))) = data;
-    fillData();
   }
 
   void Fill(const I3TableRowConstPtr &data);
@@ -63,7 +62,6 @@ private:
   size_t datasize_;
 
   boost::shared_ptr< std::vector<char> > data_;
-  void fillData();
   void setBranchAddress();
 };
 

@@ -17,12 +17,6 @@
 
 #include <TTree.h>
 
-#include <iostream>
-using namespace std;
-#define DEBUG_ENTER() cout << "Entering " << __PRETTY_FUNCTION__ << endl
-#define DEBUG_LEAVE() cout << "Leaving " << __PRETTY_FUNCTION__ << endl
-#define DEBUG_VALUE(expr) cout << #expr << " = " << expr << endl
-
 /******************************************************************************/
 
 I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
@@ -30,8 +24,6 @@ I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
   : I3Table(service, name, description),
     tree_(new TTree(name.c_str(), name.c_str())), multirow_(false)
 {
-  DEBUG_ENTER();
-
   I3ROOTBranchWrapper *counterwrapper = 0;
   if (description->GetIsMultiRow()) {
     std::string countername = "Count_" + name;
@@ -56,27 +48,22 @@ I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
 					    docstring, field, arrayLength,
 					    counterwrapper));
   }
-
-  DEBUG_LEAVE();
 }
 
 /******************************************************************************/
 
-I3ROOTTable::~I3ROOTTable() { DEBUG_ENTER(); DEBUG_LEAVE(); }
+I3ROOTTable::~I3ROOTTable() {}
 
 /******************************************************************************/
 
 void I3ROOTTable::Write()
 {
-  DEBUG_ENTER();
   tree_->Write();
-  DEBUG_LEAVE();
 }
 
 /******************************************************************************/
 
 void I3ROOTTable::WriteRows(I3TableRowConstPtr rows) {
-  DEBUG_ENTER();
   if (multirow_) {
     counter_.Fill((uint64_t)rows->GetNumberOfRows());
   }
@@ -84,14 +71,13 @@ void I3ROOTTable::WriteRows(I3TableRowConstPtr rows) {
   BOOST_FOREACH(I3ROOTBranchWrapper branch, branches_) {
     branch.Fill(rows);
   }
-  DEBUG_LEAVE();
+
+  tree_->Fill();
 }
 
 /******************************************************************************/
 
 I3Table::AlignmentType I3ROOTTable::GetAlignmentType()
 {
-  DEBUG_ENTER();
-  DEBUG_LEAVE();
   return I3Table::Strict;
 }

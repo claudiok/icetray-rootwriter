@@ -24,16 +24,9 @@
 #include <cctype>
 #include <cstring>
 
-#include <iostream>
-using namespace std;
-#define DEBUG_ENTER() cout << "Entering " << __PRETTY_FUNCTION__ << endl
-#define DEBUG_LEAVE() cout << "Leaving " << __PRETTY_FUNCTION__ << endl
-#define DEBUG_VALUE(expr) cout << #expr << " = " << expr << endl
-
 
 char I3DatatypeToROOTType(const I3Datatype &type)
 {
-  DEBUG_ENTER();
   char typechar;
 
   switch (type.kind) {
@@ -71,7 +64,6 @@ char I3DatatypeToROOTType(const I3Datatype &type)
 
   if (type.is_signed) toupper(typechar);
 
-  DEBUG_LEAVE();
   return typechar;
 }
 
@@ -90,7 +82,6 @@ I3ROOTBranchWrapper::I3ROOTBranchWrapper(TTree *tree, const I3Datatype &type,
   : tree_(tree), branch_(0), index_(index), arrayLength_(arrayLength),
     multirow_(counter != 0), datasize_(type.size), data_(new std::vector<char>)
 {
-  DEBUG_ENTER();
   // generate a type description
   std::string leafdescription = branchname;
 
@@ -123,7 +114,6 @@ I3ROOTBranchWrapper::I3ROOTBranchWrapper(TTree *tree, const I3Datatype &type,
   branch_ = tree->Branch(branchname.c_str(), &(data_->at(0)),
 			 leafdescription.c_str());
   branch_->SetTitle(docstring.c_str());
-  DEBUG_LEAVE();
 }
 
 I3ROOTBranchWrapper::I3ROOTBranchWrapper(const I3ROOTBranchWrapper &rhs)
@@ -132,12 +122,10 @@ I3ROOTBranchWrapper::I3ROOTBranchWrapper(const I3ROOTBranchWrapper &rhs)
     datasize_(rhs.datasize_), data_(rhs.data_)
 {}
 
-I3ROOTBranchWrapper::~I3ROOTBranchWrapper()
-{ DEBUG_ENTER(); DEBUG_LEAVE(); }
+I3ROOTBranchWrapper::~I3ROOTBranchWrapper() {}
 
 void I3ROOTBranchWrapper::Fill(const I3TableRowConstPtr &data)
 {
-  DEBUG_ENTER();
   // make sure we have enough room to store all elements
   if (data->GetNumberOfRows()*datasize_*arrayLength_ > data_->size()) {
     char *olddata = &(data_->at(0));
@@ -154,22 +142,9 @@ void I3ROOTBranchWrapper::Fill(const I3TableRowConstPtr &data)
 #warning TODO: Check if there is a C++ way
     memcpy(&(data_->at(row*fieldlength)), source, fieldlength);
   }
-
-  // finally: fill the branch
-  fillData();
-  DEBUG_LEAVE();
-}
-
-void I3ROOTBranchWrapper::fillData()
-{
-  DEBUG_ENTER();
-  branch_->Fill();
-  DEBUG_LEAVE();
 }
 
 void I3ROOTBranchWrapper::setBranchAddress()
 {
-  DEBUG_ENTER();
   branch_->SetAddress(&(data_->at(0)));
-  DEBUG_LEAVE();
 }
