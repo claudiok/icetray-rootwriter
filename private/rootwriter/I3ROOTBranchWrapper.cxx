@@ -24,8 +24,6 @@
 #include <cctype>
 #include <cstring>
 
-#include <iostream>
-
 
 char I3DatatypeToROOTType(const I3Datatype &type)
 {
@@ -101,7 +99,6 @@ I3ROOTBranchWrapper::I3ROOTBranchWrapper(TTree *tree, const I3Datatype &type,
     leafdescription.append(boost::lexical_cast<std::string>(arrayLength_));
     leafdescription.push_back(']');
   }
-  std::cout << leafdescription << std::endl;
 
   // generate the type of the field
   leafdescription.push_back('/');
