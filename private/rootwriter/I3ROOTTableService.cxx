@@ -13,7 +13,6 @@
 #include "rootwriter/I3ROOTTable.h"
 
 #include <TFile.h>
-#include <TSystem.h>
 
 #include <boost/foreach.hpp>
 
@@ -25,7 +24,6 @@ I3ROOTTableService::I3ROOTTableService(const std::string &filename, int compress
 {
   if (!file_->IsOpen())
     log_fatal("Cannot open file %s", filename.c_str());
-  gSystem->IgnoreSignal(kSigSegmentationViolation);
 }
 
 I3ROOTTableService::~I3ROOTTableService() {}
