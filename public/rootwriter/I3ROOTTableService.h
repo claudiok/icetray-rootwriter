@@ -12,18 +12,21 @@
 #ifndef ROOTWRITER_I3ROOTTABLESERVICE_H_INCLUDED
 #define ROOTWRITER_I3ROOTTABLESERVICE_H_INCLUDED
 
-#include "tableio/internals/I3TableService.h"
+#include <icetray/I3PointerTypedefs.h>
+#include <tableio/internals/I3TableService.h>
 
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
 class TFile;
-class I3ROOTTable;
+
+I3_FORWARD_DECLARATION(I3ROOTTable);
 
 
 class I3ROOTTableService : public I3TableService {
 public:
-  I3ROOTTableService(const std::string &filename, int compress = 1,
+  I3ROOTTableService(const std::string &filename,
+		     const std::string &master = "MasterTree", int compress = 1, 
 		     const std::string &mode = "RECREATE");
   virtual ~I3ROOTTableService();
   
@@ -34,7 +37,10 @@ protected:
   
 private:
   boost::shared_ptr<TFile> file_;
-  std::vector< boost::shared_ptr<I3ROOTTable> > tables_;
+  std::vector< I3ROOTTablePtr > tables_;
+  bool open_;
+
+  I3ROOTTablePtr mastertable_;
   
   SET_LOGGER("I3ROOTTableService");
 };

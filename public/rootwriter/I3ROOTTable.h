@@ -23,6 +23,7 @@ I3_FORWARD_DECLARATION(I3TableRowDescription);
 I3_FORWARD_DECLARATION(I3TableRow);
 
 class TBranch;
+class I3ROOTTableService;
 
 
 class I3ROOTTable : public I3Table {
@@ -42,6 +43,8 @@ private:
   bool multirow_;
   std::vector<I3ROOTBranchWrapper> branches_;
   I3ROOTBranchWrapper counter_;
+
+  friend class I3ROOTTableService;
 
   SET_LOGGER("I3ROOTTable");
 };
