@@ -13,7 +13,6 @@
 #define I3ROOTTABLE_H_INCLUDED
 
 #include <tableio/internals/I3Table.h>
-#include <rootwriter/I3ROOTBranchWrapper.h>
 
 #include <vector>
 
@@ -21,8 +20,11 @@
 I3_FORWARD_DECLARATION(I3TableService);
 I3_FORWARD_DECLARATION(I3TableRowDescription);
 I3_FORWARD_DECLARATION(I3TableRow);
+I3_FORWARD_DECLARATION(I3ROOTBranchWrapper);
+I3_FORWARD_DECLARATION(I3ROOTBranchWrapperData);
 
 class TBranch;
+class TTree;
 class I3ROOTTableService;
 
 
@@ -41,8 +43,8 @@ protected:
 private:
   TTree *tree_;
   bool multirow_;
-  std::vector<I3ROOTBranchWrapper> branches_;
-  I3ROOTBranchWrapper counter_;
+  I3ROOTBranchWrapperDataPtr counter_;
+  std::vector<I3ROOTBranchWrapperPtr> branches_;
 
   friend class I3ROOTTableService;
 

@@ -9,9 +9,10 @@
  * @author Fabian Kislat <fabian.kislat@desy.de> Last changed by: $LastChangedBy$
  */
 
-#ifndef ROOTWRITER_I3ROOTBRANCHWRAPPER_H_INCLUDED
-#define ROOTWRITER_I3ROOTBRANCHWRAPPER_H_INCLUDED
+#ifndef ROOTWRITER_I3ROOTBRANCHWRAPPERDATA_H_INCLUDED
+#define ROOTWRITER_I3ROOTBRANCHWRAPPERDATA_H_INCLUDED
 
+#include "I3ROOTBranchWrapper.h"
 #include <icetray/I3PointerTypedefs.h>
 
 #include <boost/shared_ptr.hpp>
@@ -26,14 +27,14 @@ class TBranch;
 class TTree;
 
 
-class I3ROOTBranchWrapper {
+class I3ROOTBranchWrapperData : public I3ROOTBranchWrapper {
 public:
-  I3ROOTBranchWrapper();
-  I3ROOTBranchWrapper(TTree *tree, const I3Datatype &type, const std::string &branchname,
-		      const std::string &docstring, unsigned int index,
-		      size_t arrayLength = 1, const I3ROOTBranchWrapper *counter = 0);
-  I3ROOTBranchWrapper(const I3ROOTBranchWrapper &rhs);
-  ~I3ROOTBranchWrapper();
+  I3ROOTBranchWrapperData();
+  I3ROOTBranchWrapperData(TTree *tree, const I3Datatype &type, const std::string &branchname,
+			  const std::string &docstring, unsigned int index, size_t arrayLength = 1,
+			  const I3ROOTBranchWrapperConstPtr &counter = I3ROOTBranchWrapperConstPtr());
+  I3ROOTBranchWrapperData(const I3ROOTBranchWrapperData &rhs);
+  ~I3ROOTBranchWrapperData();
 
   template <typename T>
   void Fill(const T &data)
@@ -51,18 +52,13 @@ public:
   }
 
   void Fill(const I3TableRowConstPtr &data);
-  TBranch* Branch() { return branch_; }
 
 private:
-  TTree *tree_;
-  TBranch *branch_;
-  unsigned int index_;
-  size_t arrayLength_;
-  bool multirow_;
   size_t datasize_;
-
   boost::shared_ptr< std::vector<char> > data_;
   void setBranchAddress();
 };
+
+I3_POINTER_TYPEDEFS(I3ROOTBranchWrapperData);
 
 #endif // ROOTWRITER_I3ROOTBRANCHWRAPPER_H_INCLUDED
