@@ -52,7 +52,7 @@
    <code>I3RecoPulseSeriesMap</code>) an additional branch is added to the
    tree
    <ul>
-   <li><code>ULong64_t Count_&lt;tree_name&rt;</code> - the number of items in 
+   <li><code>ULong64_t Count_&lt;tree_name&gt;</code> - the number of items in 
        the current event.</li>
    </ul>
    All further branches are then arrays of the given length. Every branch 
