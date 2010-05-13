@@ -27,7 +27,7 @@
 
 char I3DatatypeToROOTType(const I3Datatype &type)
 {
-  char typechar;
+  char typechar = '\0';
 
   switch (type.kind) {
   case I3Datatype::Float:
@@ -62,7 +62,7 @@ char I3DatatypeToROOTType(const I3Datatype &type)
     assert(false);
   }
 
-  if (type.is_signed) toupper(typechar);
+  if (type.is_signed) typechar = toupper(typechar);
 
   return typechar;
 }
