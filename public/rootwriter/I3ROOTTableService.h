@@ -17,7 +17,7 @@
 #define ROOTWRITER_I3ROOTTABLESERVICE_H_INCLUDED
 
 #include <icetray/I3PointerTypedefs.h>
-#include <tableio/internals/I3TableService.h>
+#include <tableio/I3TableService.h>
 
 #include <boost/shared_ptr.hpp>
 #include <vector>

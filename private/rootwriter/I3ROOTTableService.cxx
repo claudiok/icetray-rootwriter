@@ -11,7 +11,7 @@
 
 #include "rootwriter/I3ROOTTableService.h"
 #include "rootwriter/I3ROOTTable.h"
-#include <tableio/internals/I3TableRowDescription.h>
+#include <tableio/I3TableRowDescription.h>
 
 #include <TFile.h>
 #include <TTree.h>

@@ -12,8 +12,8 @@
 #include "I3ROOTBranchWrapperData.h"
 
 #include <icetray/I3Logging.h>
-#include <tableio/internals/I3Datatype.h>
-#include <tableio/internals/I3TableRow.h>
+#include <tableio/I3Datatype.h>
+#include <tableio/I3TableRow.h>
 
 #include <TBranch.h>
 #include <TTree.h>
@@ -131,7 +131,6 @@ void I3ROOTBranchWrapperData::Fill(const I3TableRowConstPtr &data)
   size_t fieldlength = datasize_*arrayLength_;
   for (unsigned int row = 0; row < data->GetNumberOfRows(); ++row) {
     const void *source = data->GetPointerToField(index_, row);
-#warning TODO: Check if there is a C++ way
     memcpy(&(data_->at(row*fieldlength)), source, fieldlength);
   }
 }

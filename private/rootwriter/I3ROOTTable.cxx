@@ -12,8 +12,8 @@
 #include "rootwriter/I3ROOTTable.h"
 #include "I3ROOTBranchWrapperData.h"
 #include "I3ROOTBranchWrapperEnum.h"
-#include "tableio/internals/I3TableRow.h"
-#include "tableio/internals/I3TableRowDescription.h"
+#include <tableio/I3TableRow.h>
+#include <tableio/I3TableRowDescription.h>
 
 #include <boost/foreach.hpp>
 

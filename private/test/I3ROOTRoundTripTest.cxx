@@ -13,8 +13,8 @@
 #include <I3Test.h>
 #include <limits.h>
 
-#include <tableio/internals/I3TableRow.h>
-#include <tableio/internals/I3TableRowDescription.h>
+#include <tableio/I3TableRow.h>
+#include <tableio/I3TableRowDescription.h>
 #include <rootwriter/I3ROOTTableService.h>
 #include <rootwriter/I3ROOTTable.h>
 

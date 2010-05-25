@@ -12,7 +12,7 @@
 #ifndef	I3ROOTTABLE_H_INCLUDED
 #define I3ROOTTABLE_H_INCLUDED
 
-#include <tableio/internals/I3Table.h>
+#include <tableio/I3Table.h>
 
 #include <vector>
 

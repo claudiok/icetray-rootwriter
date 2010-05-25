@@ -12,8 +12,8 @@
 #include "I3ROOTBranchWrapperEnum.h"
 
 #include <icetray/I3Logging.h>
-#include <tableio/internals/I3Datatype.h>
-#include <tableio/internals/I3TableRow.h>
+#include <tableio/I3Datatype.h>
+#include <tableio/I3TableRow.h>
 
 #include <TBranch.h>
 #include <TTree.h>
