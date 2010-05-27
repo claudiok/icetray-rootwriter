@@ -3,7 +3,6 @@
 #
 
 i3_project(rootwriter 
-#  PYTHON_DIR python
   DOCS_DIR resources/docs
 )
 
