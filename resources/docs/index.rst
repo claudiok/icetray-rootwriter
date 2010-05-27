@@ -18,7 +18,7 @@ A tableio backend for writing root files
 Usage
 ^^^^^^^^
 This page summarizes the usage of the rootwriter tableio backend. For more
-details on tableio, please read :doc:`../tableio`.
+details on tableio, please read :ref:`the tableio documentation <tableio-main>`.
 
 The rootwriter project supplies a tableio :class:`I3TableService` and an :class:`I3Table`
 implementation to export data from IceTray to root trees. Tableio converters
