@@ -45,8 +45,8 @@ I3TablePtr I3ROOTTableService::CreateTable(const std::string &tableName,
 void I3ROOTTableService::CloseFile()
 {
   if (open_) {
-    log_warn("Closing '%s'. Did I want to do some sanity checks first?",
-	     file_->GetName());
+    // log_warn("Closing '%s'. Did I want to do some sanity checks first?",
+         // file_->GetName());
     file_->cd();
     mastertable_->Align();
     BOOST_FOREACH(I3ROOTTablePtr table, tables_) {
