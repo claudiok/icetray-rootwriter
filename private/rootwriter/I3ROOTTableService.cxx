@@ -50,7 +50,7 @@ void I3ROOTTableService::CloseFile()
     file_->cd();
     mastertable_->Align();
     BOOST_FOREACH(I3ROOTTablePtr table, tables_) {
-      mastertable_->tree_->AddFriend(table->tree_);
+      mastertable_->tree_->AddFriend(table->tree_->GetName());
       table->Write();
     }
     mastertable_->Write();
