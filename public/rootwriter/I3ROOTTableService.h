@@ -22,8 +22,6 @@
 #include <boost/shared_ptr.hpp>
 #include <vector>
 
-class TFile;
-
 I3_FORWARD_DECLARATION(I3ROOTTable);
 
 
@@ -45,12 +43,15 @@ public:
    *                 <code>TFile</code> in the ROOT documentation for the
    *                 meaning of this number. The default should be okay for most
    *                 people.
+   * \param maxSize Maximum file size. ROOT does automatic splitting of the .root
+   *                files. The default is 1.9GB as in ROOT.
    * \param mode The file mode of the ROOT file. See the documentation of 
    *             <code>TFile</code> in the ROOT documentation. Only change this
    *             if you really know what you are doing!
    */
   I3ROOTTableService(const std::string &filename,
 		     const std::string &master = "MasterTree", int compress = 1, 
+		     long long int maxSize = 1900000000, /* 1.9GB, default in ROOT */
 		     const std::string &mode = "RECREATE");
   virtual ~I3ROOTTableService();
   
@@ -68,7 +69,6 @@ protected:
   virtual void CloseFile();
   
 private:
-  boost::shared_ptr<TFile> file_;
   std::vector< I3ROOTTablePtr > tables_;
   bool open_;
 

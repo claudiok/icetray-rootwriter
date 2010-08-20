@@ -30,8 +30,14 @@ file::
 
 The first parameter of the constructor is the filename of the output file.
 For a documentation of the other (optional) parameters, read the 
-documentation of :class:`I3ROOTTableService`. Once created you can pass this
-object as the ``tableservice`` parameter to an :class:`I3TableWriter`::
+documentation of :class:`I3ROOTTableService`. One thing users should be aware
+of is that ROOT automatically splits files when they reach a certain size. 
+I3ROOTTableService has a parameter to control that size. Split files can only
+be read correctly in a chain, especially when it comes to the alignment of the
+trees.
+
+Once created you can pass this object as the ``tableservice`` parameter to
+an :class:`I3TableWriter`::
 
     tray.AddModule(I3TableWriter, "recowriter",
                    tableservice = rootout,
