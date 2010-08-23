@@ -99,9 +99,19 @@ I3ROOTBranchWrapperData::I3ROOTBranchWrapperData(TTree *tree, const I3Datatype &
     leafdescription.push_back(']');
   }
 
+  char typechar = I3DatatypeToROOTType(type);
+
+  // when reading the tree ROOT cannot distinguish an array of signed char
+  // and a string (char*)
+  // workaround: book array of signed shorts
+  // a single signed byte should be fine
+  if ((arrayLength_ > 1) && (typechar == 'B')) {
+    typechar = 'S';
+  }
+
   // generate the type of the field
   leafdescription.push_back('/');
-  leafdescription.push_back(I3DatatypeToROOTType(type));
+  leafdescription.push_back(typechar);
 
   // finally: create the branch
   TBranch *branch = tree->Branch(branchname.c_str(), &(data_->at(0)),
