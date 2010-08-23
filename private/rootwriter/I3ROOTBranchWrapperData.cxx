@@ -184,7 +184,7 @@ void I3ROOTBranchWrapperData::RootSignedCharArrayHackFillData(const I3TableRowCo
     const int8_t *source = data->GetPointer<int8_t>(index_, row);
     int16_t *localdata = reinterpret_cast<int16_t*>(&data_->at(row*fieldlength));
     for (size_t i = 0; i < arrayLength_; ++i) {
-      *(localdata + i) = source[i];
+      localdata[i] = source[i];
     }
   }
 }
