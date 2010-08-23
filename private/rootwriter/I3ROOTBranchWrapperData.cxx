@@ -178,14 +178,13 @@ void I3ROOTBranchWrapperData::RootSignedCharArrayHackFillData(const I3TableRowCo
     }
   }
 
-  // copy all elements to our internal data array
+  // copy all elements to our internal data array and convert them to int16_t on the way
   size_t fieldlength = datasize*arrayLength_;
   for (unsigned int row = 0; row < data->GetNumberOfRows(); ++row) {
     const int8_t *source = data->GetPointer<int8_t>(index_, row);
+    int16_t *localdata = reinterpret_cast<int16_t*>(&data_->at(row*fieldlength));
     for (size_t i = 0; i < arrayLength_; ++i) {
-      // really a hack. any better idea?
-      int16_t *dest = reinterpret_cast<int16_t*>(&data_->at(row*fieldlength + i*datasize));
-      *dest = source[i];
+      *(localdata + i) = source[i];
     }
   }
 }
