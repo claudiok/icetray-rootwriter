@@ -57,9 +57,9 @@ TEST(resurrection) {
   I3TableRowDescriptionPtr desc = I3TableRowDescriptionPtr(new I3TableRowDescription());
   desc->SetIsMultiRow(true); // we plan to write multiple rows
   desc->AddField<double>(double_name, "double-units", double_description);
-  desc->AddField<short>(short_name, "short-units", short_description);
-  desc->AddField<char>(char_name, "letter", char_description);
-  desc->AddField<long>(long_name, "smoots", long_description);
+  desc->AddField<int16_t>(short_name, "short-units", short_description);
+  desc->AddField<int8_t>(char_name, "letter", char_description);
+  desc->AddField<int64_t>(long_name, "smoots", long_description);
    
   bool thrown = false;
   try { desc->AddField<bool>(bool_name, "truth-units", bool_description); }
@@ -68,7 +68,7 @@ TEST(resurrection) {
    
   desc->AddField<bool>(bool_name, "", bool_description);
 	
-  desc->AddField<int>(vector_name, "", vector_description, vector_length);   
+  desc->AddField<int32_t>(vector_name, "", vector_description, vector_length);   
    
   // create a table in the HDF file
   I3TablePtr table = writer_service->GetTable(treename,desc);
@@ -78,21 +78,21 @@ TEST(resurrection) {
   I3TableRowPtr rows = table->CreateRow(nrows);
 
   double doubleval = 3.14;
-  short shortval = 512;
-  short charval = CHAR_MAX;
-  long longval = LONG_MAX;
+  int16_t shortval = 512;
+  int8_t charval = std::numeric_limits<int8_t>::max();
+  int64_t longval = std::numeric_limits<int64_t>::max();
   bool boolval = true;
-  size_t i,j;
+  size_t i, j;
    
-  for(i=0; i<nrows; i++) {
+  for (i=0; i<nrows; i++) {
     rows->SetCurrentRow(i);
-    rows->Set<double>("double",doubleval);
-    rows->Set<short>("shorty",shortval);
-    rows->Set<char>("charlatan",charval);
-    rows->Set<long>("long_dooby_doo_long_long",longval);
-    rows->Set<bool>("farcicality",boolval);
-    int* vec = rows->GetPointer<int>("vector");
-    for (j=0;j<vector_length;j++) vec[j] = j;
+    rows->Set<double>(double_name, doubleval);
+    rows->Set<int16_t>(short_name, shortval);
+    rows->Set<int8_t>(char_name, charval);
+    rows->Set<int64_t>(long_name, longval);
+    rows->Set<bool>(bool_name, boolval);
+    int32_t* vec = rows->GetPointer<int32_t>(vector_name);
+    for (j=0; j < vector_length; j++) vec[j] = j;
   }
 
   I3EventHeaderConstPtr fake_header = I3EventHeaderConstPtr(new I3EventHeader());
@@ -124,19 +124,19 @@ TEST(resurrection) {
   TBranch *shortBranch = tree->GetBranch(short_name);
   ENSURE( shortBranch != NULL, "Branch was written but cannot be retrieved from the tree" );
   ENSURE_EQUAL( shortBranch->GetLeaf(short_name)->GetLen(), int(countVariable), "Leaf has correct length" );
-  short *shortVariable = new short[countVariable];
+  int16_t *shortVariable = new short[countVariable];
   shortBranch->SetAddress(shortVariable);
 
   TBranch *charBranch = tree->GetBranch(char_name);
   ENSURE( charBranch != NULL, "Branch was written but cannot be retrieved from the tree" );
   ENSURE_EQUAL( charBranch->GetLeaf(char_name)->GetLen(), int(countVariable), "Leaf has correct length" );
-  char *charVariable = new char[countVariable];
+  int16_t *charVariable = new int16_t[countVariable];
   charBranch->SetAddress(charVariable);
 
   TBranch *longBranch = tree->GetBranch(long_name);
   ENSURE( longBranch != NULL, "Branch was written but cannot be retrieved from the tree" );
   ENSURE_EQUAL( longBranch->GetLeaf(long_name)->GetLen(), int(countVariable), "Leaf has correct length" );
-  long *longVariable = new long[countVariable];
+  int64_t *longVariable = new long[countVariable];
   longBranch->SetAddress(longVariable);
 
   TBranch *boolBranch = tree->GetBranch(bool_name);
@@ -149,7 +149,7 @@ TEST(resurrection) {
   ENSURE( vectorBranch != NULL, "Branch was written but cannot be retrieved from the tree" );
   ENSURE_EQUAL( vectorBranch->GetLeaf(vector_name)->GetLen(), int(vector_length*countVariable),
 		"Vector has correct length" );
-  int vectorVariable[vector_length*countVariable];
+  int32_t vectorVariable[vector_length*countVariable];
   vectorBranch->SetAddress(vectorVariable);
 
   tree->GetEntry(0);
@@ -162,7 +162,7 @@ TEST(resurrection) {
     ENSURE_EQUAL(boolVariable[i], boolval, "Bool values match");
     
     for (j = 0; j < vector_length; ++j)
-      ENSURE_EQUAL(vectorVariable[i*vector_length + j], int(j), "Vector values match");
+      ENSURE_EQUAL(vectorVariable[i*vector_length + j], int32_t(j), "Vector values match");
   }
 
   file.Close();
