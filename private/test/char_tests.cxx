@@ -2,11 +2,11 @@
  * copyright  (C) 2010
  * The Icecube Collaboration
  *
- * $Id: I3ROOTRoundTripTest.cxx 64303 2010-05-25 16:54:04Z kislat $
+ * $Id$
  *
- * @version $Revision: 64303 $
- * @date $LastChangedDate: 2010-05-25 18:54:04 +0200 (Tue, 25 May 2010) $
- * @author Fabian Kislat <fabian.kislat@desy.de> Last changed by: $LastChangedBy: kislat $
+ * @version $Revision$
+ * @date $LastChangedDate$
+ * @author Fabian Kislat <fabian.kislat@desy.de> Last changed by: $LastChangedBy$
  */
 
 
