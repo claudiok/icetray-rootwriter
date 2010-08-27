@@ -136,7 +136,7 @@ TEST(resurrection) {
   TBranch *longBranch = tree->GetBranch(long_name);
   ENSURE( longBranch != NULL, "Branch was written but cannot be retrieved from the tree" );
   ENSURE_EQUAL( longBranch->GetLeaf(long_name)->GetLen(), int(countVariable), "Leaf has correct length" );
-  int64_t *longVariable = new long[countVariable];
+  int64_t *longVariable = new int64_t[countVariable];
   longBranch->SetAddress(longVariable);
 
   TBranch *boolBranch = tree->GetBranch(bool_name);
