@@ -36,7 +36,7 @@ char I3DatatypeToROOTType(const I3Datatype &type)
     } else if (type.size == 8) {
       typechar = 'D';
     } else {
-      log_fatal("Cannot book variables of type '%s' with a size of %lu bits",
+      log_fatal("Cannot book variables of type '%s' with a size of %zu bits",
 		type.description.c_str(), type.size*8);
     }
     break;
@@ -51,7 +51,7 @@ char I3DatatypeToROOTType(const I3Datatype &type)
     } else if (type.size == 8) {
       typechar = 'l';
     } else {
-      log_fatal("Cannot book variables of type %s with a size of %lu bits",
+      log_fatal("Cannot book variables of type %s with a size of %zu bits",
 		type.description.c_str(), type.size*8);
     }
     break;
