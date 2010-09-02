@@ -11,12 +11,15 @@
 .. highlight:: pycon
 
 rootwriter
-=================
+==========
 
-A tableio backend for writing root files
+A tableio backend for writing root files.
 
 Usage
-^^^^^^^^
+^^^^^
+
+.. highlight:: python
+
 This page summarizes the usage of the rootwriter tableio backend. For more
 details on tableio, please read :ref:`the tableio documentation <tableio-main>`.
 
@@ -26,15 +29,14 @@ are used to convert the objects in the :class:`I3Frame`. In order to use the
 rootwriter backend, construct an :class:`I3ROOTTableService` object in the steering
 file::
 
+    from icecube.tableio import I3TableWriter
+    from icecube.rootwriter import I3ROOTTableService
+
     rootout = I3ROOTTableService(outputfilename)
 
 The first parameter of the constructor is the filename of the output file.
 For a documentation of the other (optional) parameters, read the 
-documentation of :class:`I3ROOTTableService`. One thing users should be aware
-of is that ROOT automatically splits files when they reach a certain size. 
-I3ROOTTableService has a parameter to control that size. Split files can only
-be read correctly in a chain, especially when it comes to the alignment of the
-trees.
+documentation of :class:`I3ROOTTableService`.
 
 Once created you can pass this object as the ``tableservice`` parameter to
 an :class:`I3TableWriter`::
@@ -73,3 +75,24 @@ All trees are friends of a master tree, which by default is called
 ``MasterTree``. Using this master tree, individual branches can be
 refered to as branches of this master tree, under the name 
 ``tree_name.branch_name``.
+
+
+Automatic file splitting
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. highlight:: python
+
+ROOT has the feature to automatically split files when they reach a certain
+size. In rootwriter this size is set to 1TB by default, effectively disabling
+the file splitting. Users can change this value by calling
+::
+
+    icecube.rootwriter.setMaxTreeSize(maxFileSizeInMB)
+
+in python to set the maximum size to maxFileSizeInMB, given in units of MiB.
+One should be aware, however, that file splitting in rootwriter is considered 
+experimental and might cause unexpected problems when reading the output files.
+Also, rootwriter cannot guarantee that all trees have the same number of 
+entries in all files. Especially, all entries of the master tree will be in the 
+last file. This means that multiple files created by file splitting can only be
+read at once using a TChain.

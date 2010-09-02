@@ -17,12 +17,16 @@ namespace bp = boost::python;
 
 
 void register_I3ROOTTableService() {
+
   bp::class_<I3ROOTTableService, 
     boost::shared_ptr<I3ROOTTableService>, bp::bases<I3TableService> >
     ("I3ROOTTableService", bp::init<const std::string>(bp::args("filename")))
     .def(bp::init<const std::string&, const std::string&>(bp::args("filename","master")))
     .def(bp::init<const std::string&, const std::string&, int>(bp::args("filename","master","compression_level")))
-    .def(bp::init<const std::string&, const std::string&, int, long long>(bp::args("filename","master","compression_level", "max_size")))
-    .def(bp::init<const std::string&, const std::string&, int, long long, const std::string&>(bp::args("filename","master","compression_level", "max_size", "mode")))
+    .def(bp::init<const std::string&, const std::string&, int, const std::string&>(bp::args("filename","master","compression_level", "mode")))
     ;
+
+  bp::def("setMaxTreeSize", &I3ROOTTableService::setMaxTreeSize, bp::args("maxSize"),
+	  "Set the maximum file size in MiB. ROOT will automatically do the splitting.");
+
 }
