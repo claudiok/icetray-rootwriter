@@ -26,7 +26,7 @@ namespace {
     {
       // set the maximum tree size to 1TB to essentially keep ROOT from
       // splitting files
-      TTree::SetMaxTreeSize(1000000000000);
+      TTree::SetMaxTreeSize(1000000000000LL);
     }
   };
 
