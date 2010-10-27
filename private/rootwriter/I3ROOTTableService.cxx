@@ -65,6 +65,8 @@ void I3ROOTTableService::setMaxTreeSize(long long int maxSize)
 I3TablePtr I3ROOTTableService::CreateTable(const std::string &tableName, 
 					   I3TableRowDescriptionConstPtr description)
 {
+  // activate the right file
+  if (mastertable_) mastertable_->tree_->GetCurrentFile()->cd();
   I3ROOTTablePtr table(new I3ROOTTable(*this, tableName, description));
   if (mastertable_) {  // will not do this for the master table
     tables_.push_back(table);
@@ -76,13 +78,15 @@ void I3ROOTTableService::CloseFile()
 {
   if (open_) {
     mastertable_->Align();
+    TFile *file = mastertable_->tree_->GetCurrentFile();
+    file->cd();
     BOOST_FOREACH(I3ROOTTablePtr table, tables_) {
       mastertable_->tree_->AddFriend(table->tree_->GetName());
       table->Write();
     }
     mastertable_->Write();
     // close the file, one could ask any tree about the TFile pointer
-    mastertable_->tree_->GetCurrentFile()->Close();
+    file->Close();
     open_ = false;
   }
 }
