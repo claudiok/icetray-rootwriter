@@ -8,12 +8,24 @@ i3_project(rootwriter
 
 if(USE_ROOT)
 
+  i3_add_library(roottable
+    private/libroottable/TTableDescription.cxx
+
+    USE_TOOLS boost root python
+    
+    ROOTCINT public/rootwriter/TTableDescription.h
+    )
+
   i3_add_library(rootwriter
     private/rootwriter/*.cxx
   
     USE_TOOLS log4cplus boost root python
     # add all the projects needed, in particular those needed by the converters
-    USE_PROJECTS icetray dataclasses tableio)
+    USE_PROJECTS icetray dataclasses tableio
+    )
+
+  add_dependencies(rootwriter roottable)
+  target_link_libraries(rootwriter roottable)
 
   add_subdirectory(private/pybindings)
 
