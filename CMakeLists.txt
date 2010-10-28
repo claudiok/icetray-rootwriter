@@ -11,9 +11,15 @@ if(USE_ROOT)
   i3_add_library(roottable
     private/libroottable/TTableDescription.cxx
 
-    USE_TOOLS boost root python
+    USE_TOOLS boost root
     
     ROOTCINT public/rootwriter/TTableDescription.h
+
+    WITHOUT_I3_HEADERS
+    )
+
+  set_target_properties(roottable PROPERTIES
+    LINK_FLAGS "-Wl,--as-needed"
     )
 
   i3_add_library(rootwriter
