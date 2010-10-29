@@ -10,7 +10,6 @@
  */
 
 #include "rootwriter/I3ROOTTable.h"
-#include "rootwriter/TTableDescription.h"
 #include "I3ROOTBranchWrapperData.h"
 #include "I3ROOTBranchWrapperEnum.h"
 #include <tableio/I3TableRow.h>
@@ -18,7 +17,6 @@
 
 #include <boost/foreach.hpp>
 
-#include <TList.h>
 #include <TTree.h>
 
 /******************************************************************************/
@@ -29,8 +27,6 @@ I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
     tree_(new TTree(name.c_str(), name.c_str())), multirow_(false),
     counter_(I3ROOTBranchWrapperDataPtr())
 {
-  TTableDescription *tableDescription = new TTableDescription(name);
-
   if (description->GetIsMultiRow()) {
     std::string countername = "Count_" + name;
     static const std::string counterdescription =
@@ -41,13 +37,10 @@ I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
 						     false),
 				          countername, counterdescription, 0));
     multirow_ = true;
-    tableDescription->SetCounterName(countername);
-    tableDescription->AddColumn(countername, "", counterdescription);
   }
 
   for (size_t field = 0; field < description->GetFieldNames().size(); ++field) {
     std::string branchname = description->GetFieldNames().at(field);
-    std::string unit = description->GetFieldUnits().at(field);
     I3Datatype datatype = description->GetFieldTypes().at(field);
     size_t arrayLength = description->GetFieldArrayLengths().at(field);
     std::string docstring = description->GetFieldDocStrings().at(field);
@@ -56,19 +49,14 @@ I3ROOTTable::I3ROOTTable(I3TableService& service, const std::string& name,
 					 branchname, docstring, field,
 					 arrayLength, counter_));
     branches_.push_back(branchwrapper);
-    tableDescription->AddColumn(branchname, unit, docstring, arrayLength);
 
     if (datatype.kind == I3Datatype::Enum) {
-      branchname += "_String";
       I3ROOTBranchWrapperEnumPtr enumwrapper(new I3ROOTBranchWrapperEnum(tree_,
-					     datatype, branchname,
+					     datatype, branchname + "_String",
 					     docstring, field, arrayLength, counter_));
       branches_.push_back(enumwrapper);
-      tableDescription->AddColumn(branchname, "enum", docstring, arrayLength);
     }
   }
-
-  tree_->GetUserInfo()->Add(tableDescription);
 }
 
 /******************************************************************************/
