@@ -25,8 +25,8 @@ if(USE_ROOT)
 
 else(USE_ROOT)
 
-  message(STATUS "ROOT has been disabled in your configuration.")
-  message(STATUS "Skipping build of ${PROJECT_NAME}")
+  colormsg(CYAN "+-- ROOT has been disabled in your configuration.")
+  colormsg(CYAN "+-- Skipping build of ${PROJECT_NAME}")
 
 endif(USE_ROOT)
 
