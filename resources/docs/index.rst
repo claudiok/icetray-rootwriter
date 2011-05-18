@@ -63,7 +63,8 @@ If the object stored in the tree was an array like structure (like e.g. an
 * ``ULong64_t Count_<tree_name>`` - the number of items in the current event.
 
 .. highlight:: c++
-All further branches are then arrays of the given length. Every branch 
+
+All further branches are then arrays of the given length. Every branch
 has the description stored in the branch title. You can access it via ::
 
     tree->GetBranch("branch")->GetTitle();
