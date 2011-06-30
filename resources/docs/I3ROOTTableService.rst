@@ -8,6 +8,10 @@
 .. @date $LastChangedDate: $
 .. @author Fabian Kislat <fabian.kislat@desy.de>, $LastChangedBy: $
 
+====================
+ I3ROOTTableService
+====================
+
 .. c:type:: I3ROOTTableService
 
     encapsulates a root file and provides methods of writing data to that ROOT

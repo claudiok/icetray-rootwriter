@@ -15,6 +15,10 @@ rootwriter
 
 A tableio backend for writing root files.
 
+.. toctree::
+
+   I3ROOTTableService
+
 Usage
 ^^^^^
 
