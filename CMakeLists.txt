@@ -4,6 +4,7 @@
 
 i3_project(rootwriter 
   DOCS_DIR resources/docs
+  PYTHON_DIR python
 )
 
 if(USE_ROOT)
