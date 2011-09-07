@@ -25,6 +25,7 @@ BOOST_PP_SEQ_FOR_EACH(I3_REGISTRATION_FN_DECL, ~, REGISTER_THESE_THINGS)
 I3_PYTHON_MODULE(rootwriter)
 {
   load_project("librootwriter", false);
+  bp::import("icecube.tableio");
 
   BOOST_PP_SEQ_FOR_EACH(I3_REGISTER, ~, REGISTER_THESE_THINGS);
 }
