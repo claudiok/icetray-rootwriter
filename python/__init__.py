@@ -3,7 +3,8 @@ from icecube import icetray, tableio
 
 load_pybindings(__name__, __path__)
 
-@icetray.traysegment(parent=tableio.I3TableWriter, removeopts=('TableService',))
+@icetray.traysegment_inherit(tableio.I3TableWriter,
+    removeopts=('TableService',))
 def I3ROOTWriter(tray, name, Output=None, **kwargs):
 	"""Tabulate data to a ROOT file.
 
