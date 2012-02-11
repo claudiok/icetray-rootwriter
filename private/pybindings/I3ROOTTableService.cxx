@@ -18,12 +18,12 @@ namespace bp = boost::python;
 
 void register_I3ROOTTableService() {
 
+  typedef bp::init<const std::string&,const std::string&,
+    int,const std::string&> ctor;
   bp::class_<I3ROOTTableService, 
     boost::shared_ptr<I3ROOTTableService>, bp::bases<I3TableService> >
-    ("I3ROOTTableService", bp::init<const std::string>(bp::args("filename")))
-    .def(bp::init<const std::string&, const std::string&>(bp::args("filename","master")))
-    .def(bp::init<const std::string&, const std::string&, int>(bp::args("filename","master","compression_level")))
-    .def(bp::init<const std::string&, const std::string&, int, const std::string&>(bp::args("filename","master","compression_level", "mode")))
+    ("I3ROOTTableService",ctor((bp::args("filename"), bp::arg("master")="MasterTree",
+        bp::arg("compression_level")=1, bp::arg("mode")="RECREATE")))
     ;
 
   bp::def("setMaxTreeSize", &I3ROOTTableService::setMaxTreeSize, bp::args("maxSize"),
