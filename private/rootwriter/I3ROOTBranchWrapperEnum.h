@@ -34,7 +34,7 @@ public:
 			  const std::string &docstring, unsigned int index, size_t arrayLength = 1,
 			  const I3ROOTBranchWrapperConstPtr &counter = I3ROOTBranchWrapperConstPtr());
   I3ROOTBranchWrapperEnum(const I3ROOTBranchWrapperEnum &rhs);
-  ~I3ROOTBranchWrapperEnum();
+  virtual ~I3ROOTBranchWrapperEnum();
 
   void Fill(const I3TableRowConstPtr &data);
 

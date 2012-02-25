@@ -32,7 +32,7 @@ public:
   I3ROOTBranchWrapper(TTree *tree, unsigned int index, size_t arrayLength = 1,
 		      bool multirow = false);
   I3ROOTBranchWrapper(const I3ROOTBranchWrapper &rhs);
-  ~I3ROOTBranchWrapper();
+  virtual ~I3ROOTBranchWrapper();
 
   virtual void Fill(const I3TableRowConstPtr &data) = 0;
   const TBranch *Branch() const { return branch_; }

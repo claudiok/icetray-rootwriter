@@ -34,7 +34,7 @@ public:
 			  const std::string &docstring, unsigned int index, size_t arrayLength = 1,
 			  const I3ROOTBranchWrapperConstPtr &counter = I3ROOTBranchWrapperConstPtr());
   I3ROOTBranchWrapperData(const I3ROOTBranchWrapperData &rhs);
-  ~I3ROOTBranchWrapperData();
+  virtual ~I3ROOTBranchWrapperData();
 
   template <typename T>
   void Fill(const T &data)
