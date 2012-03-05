@@ -80,7 +80,7 @@ I3ROOTBranchWrapperData::I3ROOTBranchWrapperData(TTree *tree, const I3Datatype &
 						 const I3ROOTBranchWrapperConstPtr &counter)
   : I3ROOTBranchWrapper(tree, index, arrayLength, counter),
     datasize_(type.size), data_(new std::vector<char>),
-    rootSignedCharArrayHack_(false)
+    rootCharArrayHack_(false), rootCharArrayIsSigned_(true)
 {
   // generate a type description
   std::string leafdescription = branchname;
@@ -102,15 +102,22 @@ I3ROOTBranchWrapperData::I3ROOTBranchWrapperData(TTree *tree, const I3Datatype &
 
   char typechar = I3DatatypeToROOTType(type);
 
-  // when reading the tree ROOT cannot distinguish an array of signed char
+  // when reading the tree (py)ROOT cannot distinguish an array of (un)signed char
   // and a string (char*)
   // workaround: book array of signed shorts
-  // a single signed byte and unsigned char arrays should be fine
-  if (((arrayLength_ > 1) || multirow_) && (typechar == 'B')) {
-    typechar = 'S';
+  // a single (un)signed byte should be fine
+  if ((arrayLength_ > 1) || multirow_) {
     // this requires some conversion when filling the data (see below)
     // if anyone comes up with a better idea (or fixes ROOT), I'd be VERY happy to hear about it
-    rootSignedCharArrayHack_ = true;
+    if (typechar == 'B') {
+      typechar = 'S';
+      rootCharArrayHack_ = true;
+      rootCharArrayIsSigned_ = true;
+    } else if (typechar == 'b') {
+      typechar = 's';
+      rootCharArrayHack_ = true;
+      rootCharArrayIsSigned_ = false;
+    }
   }
 
   // generate the type of the field
@@ -134,8 +141,11 @@ void I3ROOTBranchWrapperData::Fill(const I3TableRowConstPtr &data)
 {
   // in the particular case that we are booking an array of signed bytes
   // some conversion needs to be done (see constructor)
-  if (rootSignedCharArrayHack_) {
-    RootSignedCharArrayHackFillData(data);
+  if (rootCharArrayHack_) {
+    if (rootCharArrayIsSigned_)
+      RootCharArrayHackFillData<int8_t, int16_t>(data);
+    else
+      RootCharArrayHackFillData<uint8_t, uint16_t>(data);
     return;
   }
 
@@ -161,13 +171,14 @@ void I3ROOTBranchWrapperData::setBranchAddress()
   branch_->SetAddress(&(data_->at(0)));
 }
 
-void I3ROOTBranchWrapperData::RootSignedCharArrayHackFillData(const I3TableRowConstPtr &data)
+template <typename Source, typename Destination>
+void I3ROOTBranchWrapperData::RootCharArrayHackFillData(const I3TableRowConstPtr &data)
 {
   // this function really is just a hack to allow for the explicit
-  // conversion of signed char arrays to signed short arrays
+  // conversion of char arrays to short arrays
   // (see explanation in the constructor)
 
-  static const size_t datasize = sizeof(int16_t);
+  static const size_t datasize = sizeof(Destination);
   
   // make sure we have enough room to store all elements
   if (data->GetNumberOfRows()*datasize*arrayLength_ > data_->size()) {
@@ -181,8 +192,8 @@ void I3ROOTBranchWrapperData::RootSignedCharArrayHackFillData(const I3TableRowCo
   // copy all elements to our internal data array and convert them to int16_t on the way
   size_t fieldlength = datasize*arrayLength_;
   for (unsigned int row = 0; row < data->GetNumberOfRows(); ++row) {
-    const int8_t *source = data->GetPointer<int8_t>(index_, row);
-    int16_t *localdata = reinterpret_cast<int16_t*>(&data_->at(row*fieldlength));
+    const Source *source = data->GetPointer<Source>(index_, row);
+    Destination *localdata = reinterpret_cast<Destination*>(&data_->at(row*fieldlength));
     for (size_t i = 0; i < arrayLength_; ++i) {
       localdata[i] = source[i];
     }

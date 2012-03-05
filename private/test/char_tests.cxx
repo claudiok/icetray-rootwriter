@@ -167,7 +167,7 @@ TEST(unsigned_char_array) {
     // this branch should not be converted to 16bit length
     TBranch *uchar_array_branch = tree->GetBranch(fieldname);
     ENSURE( uchar_array_branch != NULL, "The branch we just wrote should exist" );
-    Char_t uchar_array[nbytes];
+    UShort_t uchar_array[nbytes];
     uchar_array_branch->SetAddress(uchar_array);
 
     tree->GetEntry(0);

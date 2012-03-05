@@ -56,9 +56,12 @@ public:
 private:
   size_t datasize_;
   boost::shared_ptr< std::vector<char> > data_;
-  bool rootSignedCharArrayHack_;
+  bool rootCharArrayHack_;
+  bool rootCharArrayIsSigned_;
   void setBranchAddress();
-  void RootSignedCharArrayHackFillData(const I3TableRowConstPtr &data);
+
+  template <typename Source, typename Destination>
+  void RootCharArrayHackFillData(const I3TableRowConstPtr &data);
 };
 
 I3_POINTER_TYPEDEFS(I3ROOTBranchWrapperData);
