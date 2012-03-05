@@ -2,11 +2,11 @@
 .. copyright  (C) 2010
 .. The Icecube Collaboration
 ..
-.. $Id: index.rst 77444 2011-06-30 18:28:52Z nega $
+.. $Id$
 ..
-.. @version $Revision: -1 $
-.. @date $LastChangedDate: $
-.. @author Fabian Kislat <fabian.kislat@desy.de>, $LastChangedBy: $
+.. @version $Revision$
+.. @date $LastChangedDate$
+.. @author Fabian Kislat <fabian.kislat@desy.de>, $LastChangedBy$
 
 .. highlight:: python
 

@@ -4,9 +4,9 @@
 ..
 .. $Id$
 ..
-.. @version $Revision: -1 $
-.. @date $LastChangedDate: $
-.. @author Fabian Kislat <fabian.kislat@desy.de>, $LastChangedBy: $
+.. @version $Revision$
+.. @date $LastChangedDate$
+.. @author Fabian Kislat <fabian.kislat@desy.de>, $LastChangedBy$
 
 ====================
  I3ROOTTableService
