@@ -103,6 +103,12 @@ arrays and an additional branch is added to the tree
 In case of fixed-length arrays the length is not stored anywhere in the root 
 file, but it is always the same as defined by the :cpp:class:`I3Converter`.
 
+.. note::
+
+    :cpp:class:`I3FilterResultMapConverter` creates one branch for each filter.
+    Each of these branches is an array of two :c:type:`bool`\ s. The first one
+    for the ``condition_passed`` flag, the second one for ``prescale_passed``.
+
 In some cases, fixed and variable-length arrays are combined. For instance,
 when booking ATWD waveforms, a branch of type ``double[Count_<tree_name>][128]``
 will be created. Each entry will be an array of 128 :c:type:`double`\ s.
@@ -302,3 +308,18 @@ example above::
 
 The obvious disadvantage of this way is that you have to write just as much 
 code as in C++.
+
+A note on FilterResultMaps
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+:cpp:class:`I3FilterResultMapConverter` creates a branch containing an array 
+of two :c:type:`bool`\ s for each filter. The first of these two 
+:c:type:`bool`\ s stores the ``condition_passed`` flag, the second one the
+``prescale_passed`` flag. So to determine the rate of a filter (e.g. for 
+comparison with monitoring data) you have to look at only one of them, namely
+the second one, for example:
+
+.. code-block:: c++
+
+    MasterTree->Draw("FilterMask.IceTopSTA3_11[1]")
+
