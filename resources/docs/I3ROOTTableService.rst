@@ -12,12 +12,12 @@
  I3ROOTTableService
 ====================
 
-.. c:type:: I3ROOTTableService
+.. cpp:class:: I3ROOTTableService
 
     encapsulates a root file and provides methods of writing data to that ROOT
     file in the tableio framework.
 
-    .. c:function:: I3ROOTTableService(const std::string &filename, const std::string &master = "MasterTree", int compress = 1, long long maxSize, const std::string &mode = "RECREATE")
+    .. cpp:function:: I3ROOTTableService(const std::string &filename, const std::string &master = "MasterTree", int compress = 1, long long maxSize, const std::string &mode = "RECREATE")
 
         creates a new I3ROOTTableService with the given parameters:
 	
