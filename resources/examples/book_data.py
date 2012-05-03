@@ -8,7 +8,7 @@ from icecube.tableio import I3TableWriter
 from icecube.rootwriter import I3ROOTTableService
 from icecube import dataclasses, linefit
 
-load("libdataio")
+from icecube import dataio 
 
 outfile = sys.argv[1]
 infiles = sys.argv[2:]
