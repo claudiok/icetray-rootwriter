@@ -38,9 +38,18 @@ public:
 
   void Fill(const I3TableRowConstPtr &data);
 
+  typedef void (I3ROOTBranchWrapperEnum::*FillFn)(const I3TableRowConstPtr&);
+
 private:
   boost::shared_ptr<std::string> data_;
   std::map<long, std::string> mapping_;
+
+  template <typename T>
+  void FillImp(const I3TableRowConstPtr &data);
+
+  FillFn selectFillImp(const I3Datatype &type);
+
+  FillFn fillImp_;
 };
 
 I3_POINTER_TYPEDEFS(I3ROOTBranchWrapperEnum);
