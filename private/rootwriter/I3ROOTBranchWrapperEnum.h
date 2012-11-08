@@ -22,7 +22,7 @@
 
 I3_FORWARD_DECLARATION(I3TableRow);
 
-class I3Datatype;
+struct I3Datatype;
 class TBranch;
 class TTree;
 
