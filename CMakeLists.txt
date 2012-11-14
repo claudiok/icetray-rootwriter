@@ -12,7 +12,7 @@ if(USE_ROOT)
   i3_add_library(rootwriter
     private/rootwriter/*.cxx
   
-    USE_TOOLS log4cplus boost root python
+    USE_TOOLS boost root python
     # add all the projects needed, in particular those needed by the converters
     USE_PROJECTS icetray dataclasses tableio)
 
