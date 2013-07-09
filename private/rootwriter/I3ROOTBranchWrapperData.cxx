@@ -78,7 +78,7 @@ I3ROOTBranchWrapperData::I3ROOTBranchWrapperData(TTree *tree, const I3Datatype &
 						 unsigned int index,
 						 size_t arrayLength,
 						 const I3ROOTBranchWrapperConstPtr &counter)
-  : I3ROOTBranchWrapper(tree, index, arrayLength, counter),
+  : I3ROOTBranchWrapper(tree, index, arrayLength, (bool)counter),
     datasize_(type.size), data_(new std::vector<char>),
     rootCharArrayHack_(false), rootCharArrayIsSigned_(true)
 {

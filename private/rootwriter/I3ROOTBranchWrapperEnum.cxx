@@ -36,7 +36,7 @@ I3ROOTBranchWrapperEnum::I3ROOTBranchWrapperEnum(TTree *tree, const I3Datatype &
 						 unsigned int index,
 						 size_t arrayLength,
 						 const I3ROOTBranchWrapperConstPtr &counter)
-  : I3ROOTBranchWrapper(tree, index, arrayLength, counter), data_(new std::string("")),
+  : I3ROOTBranchWrapper(tree, index, arrayLength, (bool)counter), data_(new std::string("")),
     fillImp_(selectFillImp(type))
 {
   // generate enum value to string mapping
