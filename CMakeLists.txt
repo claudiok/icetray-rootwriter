@@ -14,7 +14,7 @@ if(USE_ROOT)
   
     USE_TOOLS boost root python
     # add all the projects needed, in particular those needed by the converters
-    USE_PROJECTS icetray dataclasses tableio)
+    USE_PROJECTS icetray dataio dataclasses tableio)
 
   add_subdirectory(private/pybindings)
 

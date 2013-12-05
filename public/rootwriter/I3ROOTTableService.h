@@ -18,8 +18,10 @@
 
 #include <icetray/I3PointerTypedefs.h>
 #include <tableio/I3TableService.h>
+#include <dataio/I3FileStager.h>
 
 #include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include <vector>
 
 I3_FORWARD_DECLARATION(I3ROOTTable);
@@ -49,7 +51,17 @@ public:
    */
   I3ROOTTableService(const std::string &filename,
 		     const std::string &master = "MasterTree", int compress = 1, 
-		     const std::string &mode = "RECREATE");
+		     const std::string &mode = "RECREATE")
+  {
+      init(boost::make_shared<I3::dataio::filehandle>(filename),
+          master, compress, mode);
+  }
+  I3ROOTTableService(I3::dataio::shared_filehandle filename,
+		     const std::string &master = "MasterTree", int compress = 1, 
+		     const std::string &mode = "RECREATE")
+  {
+      init(filename, master, compress, mode);
+  }
   virtual ~I3ROOTTableService();
 
   /**
@@ -82,8 +94,11 @@ protected:
   virtual void CloseFile();
   
 private:
+  void init(I3::dataio::shared_filehandle, const std::string &master,
+      int compress, const std::string &mode);
   std::vector< I3ROOTTablePtr > tables_;
   bool open_;
+  I3::dataio::shared_filehandle filename_;
 
   I3ROOTTablePtr mastertable_;
   

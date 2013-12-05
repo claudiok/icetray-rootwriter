@@ -34,10 +34,11 @@ namespace {
 
 }
 
-I3ROOTTableService::I3ROOTTableService(const std::string &filename, const std::string &master,
+void
+I3ROOTTableService::init(I3::dataio::shared_filehandle filename, const std::string &master,
 				       int compress, const std::string &mode)
-  : I3TableService(), tables_()
 {
+  
   // This is obscure, thus a slightly longer explanation
   // ===================================================
   // The following may seem like a memory leak, but it is not:
@@ -47,9 +48,11 @@ I3ROOTTableService::I3ROOTTableService(const std::string &filename, const std::s
   // about this change, but the pointer to this TFile object will become
   // invalid. Later on we can ask any TTree about the current file, obtaining a
   // valid TFile pointer.
-  TFile *file = new TFile(filename.c_str(), mode.c_str(), "", compress);
+  if (!(filename_ = filename))
+    log_fatal("NULL file handle!");
+  TFile *file = new TFile(filename->c_str(), mode.c_str(), "", compress);
   if (!file->IsOpen())
-    log_fatal("Cannot open file %s", filename.c_str());
+    log_fatal("Cannot open file %s", filename->c_str());
 
   mastertable_ = dynamic_pointer_cast<I3ROOTTable>(GetTable(master, I3TableRowDescriptionPtr(new I3TableRowDescription)));
   open_ = true;
@@ -88,5 +91,6 @@ void I3ROOTTableService::CloseFile()
     // close the file, one could ask any tree about the TFile pointer
     file->Close();
     open_ = false;
+    filename_.reset();
   }
 }

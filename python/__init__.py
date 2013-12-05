@@ -10,6 +10,15 @@ def I3ROOTWriter(tray, name, Output=None, **kwargs):
 
 	:param Output: Path to output file
 	"""
+	
+	if Output is None:
+		raise ValueError("You must supply an output file name!")
+	
+	# Ready file for staging out if so configured
+	if 'I3FileStager' in tray.context:
+		stager = tray.context['I3FileStager']
+		Output = stager.GetWriteablePath(Output)
+	
 	tabler = I3ROOTTableService(Output)
 	tray.AddModule(tableio.I3TableWriter, name, TableService=tabler,
 	    **kwargs)
