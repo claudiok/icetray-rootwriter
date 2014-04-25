@@ -16,7 +16,12 @@ if(USE_ROOT)
     # add all the projects needed, in particular those needed by the converters
     USE_PROJECTS icetray dataio dataclasses tableio)
 
-  add_subdirectory(private/pybindings)
+  i3_add_pybindings(rootwriter
+    private/pybindings/I3ROOTTableService.cxx
+    private/pybindings/module.cxx
+    USE_TOOLS boost python root
+    USE_PROJECTS icetray rootwriter tableio
+    )
 
   i3_test_executable(test 
     private/test/*.cxx
