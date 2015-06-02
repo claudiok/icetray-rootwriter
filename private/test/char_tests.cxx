@@ -24,6 +24,7 @@
 #include <TLeaf.h>
 #include <TTree.h>
 
+#include <cstdio>
 
 TEST_GROUP(char_tests);
 
@@ -76,6 +77,7 @@ TEST(signed_char_array) {
     }
 
     file.Close();
+    std::remove(filename);
   }
 }
 
@@ -125,6 +127,7 @@ TEST(single_signed_char) {
     ENSURE_EQUAL(charVariable, value, "Values match");
 
     file.Close();
+    std::remove(filename);
   }
 }
 
@@ -177,6 +180,7 @@ TEST(unsigned_char_array) {
     }
 
     file.Close();
+    std::remove(filename);
   }
 }
 
@@ -226,5 +230,6 @@ TEST(single_unsigned_char) {
     ENSURE_EQUAL(ucharVariable, value, "Values match");
 
     file.Close();
+    std::remove(filename);
   }
 }
