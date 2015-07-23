@@ -16,6 +16,11 @@ rootwriter
 A tableio backend for writing root files.
 
 
+.. toctree::
+   :maxdepth: 1
+   
+   release_notes
+
 Usage
 ^^^^^
 
