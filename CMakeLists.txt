@@ -7,7 +7,7 @@ i3_project(rootwriter
   PYTHON_DIR python
 )
 
-if(USE_ROOT)
+if(ROOT_FOUND)
 
   i3_add_library(rootwriter
     private/rootwriter/*.cxx
@@ -29,10 +29,10 @@ if(USE_ROOT)
     USE_PROJECTS dataclasses icetray phys-services rootwriter tableio)
 
 
-else(USE_ROOT)
+else(ROOT_FOUND)
 
   colormsg(CYAN "+-- ROOT has been disabled in your configuration.")
   colormsg(CYAN "+-- Skipping build of ${PROJECT_NAME}")
 
-endif(USE_ROOT)
+endif(ROOT_FOUND)
 
