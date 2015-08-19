@@ -1,29 +1,37 @@
-#
-# $Id: RELEASE_NOTES 131681 2015-04-18 09:27:07Z meike.dewith $
-# $Author: meike.dewith $
-# $Date: 2015-04-18 04:27:07 -0500 (Sat, 18 Apr 2015) $
-#
+
+Release Notes
+=============
+
+Project mantainer: giuliano.maggi.olmedo@gmail.com
 
 August 18, 2015
------------------------------------------------------------------------
-trunk 
-* Adding RELEASE_NOTES
+---------------
+
+trunk:
+ 
+* Adding RELEASE_NOTES. 
 -- Giuliano Maggi
 
 July 23, 2015 
-------------------------------------------------------------------------
-r135543
+-------------
+
+r135543:
+
 * Add release notes to docs
 -- David Schultz
 
 June 02, 2015
-------------------------------------------------------------------------
-r133237 
-* clean up test output 
+-------------
+
+r133237:
+ 
+* Clean up test output 
 -- Don La Dieu
 
 March 13, 2015
-------------------------------------------------------------------------
-r130162 
-* updating the .mailinglist.
+--------------
+
+r130162: 
+
+* Updating the .mailinglist.
 -- Alex Olivas
