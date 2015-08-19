@@ -13,7 +13,8 @@
 rootwriter
 ==========
 
-A tableio backend for writing root files.
+A tableio backend for writing root files. This project is maintained by
+Giuliano Maggi <giuliano.maggi.olmedo@gmail.com>.
 
 
 .. toctree::
