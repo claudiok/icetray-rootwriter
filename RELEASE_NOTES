@@ -10,7 +10,8 @@ August 18, 2015
 trunk:
  
 * Adding RELEASE_NOTES. 
--- Giuliano Maggi
+
+  -- Giuliano Maggi
 
 July 23, 2015 
 -------------
@@ -18,7 +19,8 @@ July 23, 2015
 r135543:
 
 * Add release notes to docs
--- David Schultz
+
+  -- David Schultz
 
 June 02, 2015
 -------------
@@ -26,7 +28,8 @@ June 02, 2015
 r133237:
  
 * Clean up test output 
--- Don La Dieu
+
+  -- Don La Dieu
 
 March 13, 2015
 --------------
@@ -34,4 +37,5 @@ March 13, 2015
 r130162: 
 
 * Updating the .mailinglist.
--- Alex Olivas
+
+  -- Alex Olivas
