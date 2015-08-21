@@ -54,7 +54,7 @@ I3ROOTTableService::init(I3::dataio::shared_filehandle filename, const std::stri
   if (!file->IsOpen())
     log_fatal("Cannot open file %s", filename->c_str());
 
-  mastertable_ = dynamic_pointer_cast<I3ROOTTable>(GetTable(master, I3TableRowDescriptionPtr(new I3TableRowDescription)));
+  mastertable_ = boost::dynamic_pointer_cast<I3ROOTTable>(GetTable(master, I3TableRowDescriptionPtr(new I3TableRowDescription)));
   open_ = true;
 }
 
