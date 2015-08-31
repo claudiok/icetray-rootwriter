@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/env python
 
 import sys
 
@@ -6,7 +6,7 @@ from I3Tray import *
 
 from icecube.tableio import I3TableWriter
 from icecube.rootwriter import I3ROOTTableService
-from icecube import dataclasses, linefit
+from icecube import dataclasses
 
 from icecube import dataio 
 
@@ -32,7 +32,7 @@ table_service = I3ROOTTableService(filename= outfile,  #Name of the output TFile
 tray.AddModule(I3TableWriter, "writer",
                TableService = table_service,
                SubEventStreams= ['in_ice'],           #Book events happening InIce. One also can use SubEventStreams= ['in_ice','ice_top'].
-               Keys = [ "LineFit", "LineFitParams" ], #This list has to contain all the objects that you want to book.
+               Keys = [ "SPEFit2", "SPEFitSingle" ],  #This list has to contain all the objects that you want to book.
                #BookEverything=True,                  #Will book every thing in the frame, and your file will be very large, 
                                                       #we suggest "do not do that". Default is False.
                )
