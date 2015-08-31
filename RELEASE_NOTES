@@ -1,4 +1,3 @@
-
 Release Notes
 =============
 
@@ -8,6 +7,10 @@ August 18, 2015
 ---------------
 
 trunk:
+
+* Added a script that ensures the example script runs.  Removed the dependence on linefit, since that project isn't available in all meta-projects.
+
+  -- Alex Olivas
  
 * Adding RELEASE_NOTES. 
 
