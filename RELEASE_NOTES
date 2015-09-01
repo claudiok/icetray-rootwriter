@@ -1,12 +1,8 @@
+trunk
+=====
+
 Release Notes
 =============
-
-Project mantainer: giuliano.maggi.olmedo@gmail.com
-
-August 18, 2015
----------------
-
-trunk:
 
 * Added a script that ensures the example script runs.  Removed the dependence on linefit, since that project isn't available in all meta-projects.
 
@@ -16,29 +12,14 @@ trunk:
 
   -- Giuliano Maggi
 
-July 23, 2015 
--------------
-
-r135543:
-
-* Add release notes to docs
+* r135543: Add release notes to docs
 
   -- David Schultz
 
-June 02, 2015
--------------
-
-r133237:
- 
-* Clean up test output 
+* r133237: Clean up test output 
 
   -- Don La Dieu
 
-March 13, 2015
---------------
-
-r130162: 
-
-* Updating the .mailinglist.
+* r130162: Updating the .mailinglist.
 
   -- Alex Olivas
