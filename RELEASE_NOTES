@@ -1,8 +1,16 @@
-trunk
-=====
-
 Release Notes
-=============
+============
+
+Please, if you make changes in this project, leave some notes, your name  and the date.
+ 
+Trunk
+^^^^^
+
+* Add files for C++ test coverage in private/test/, I3ROOTBranchWrapperEnum.cxx and I3ROOTBranchWrapper.cxx
+  -- September 17, 2015. Giuliano Maggi.
+
+Old Releases
+^^^^^^^^^^^^
 
 * Added a script that ensures the example script runs.  Removed the dependence on linefit, since that project isn't available in all meta-projects.
 
