@@ -41,12 +41,16 @@ parameter for the output file name::
     from icecube.rootwriter import I3ROOTWriter
 
     tray.AddSegment(I3ROOTWriter, 'rootwriter',
-                    Output = outputfilename,
-		    SubEventStreams = 'nullsplit',
-                    Keys = [
-		           # keys you want to book
-		           ]
-		    )
+                    Output = '/SomePath/outputfilename.root',
+		    SubEventStreams = ['in_ice','ice_top'],
+                    Keys = ['MPEFit','SPEFit2'])
+		         		    
+* SubEventStreams: What kind of events you want to book.
+* Output: The output root file.
+* Keys: This list has to contain all the objects that you want to book.
+* BookEverything: This is another parameter that you can pass it to I3ROOTWriter. Default is False, 
+if you set it as True, you would book everything creating a very large file. We would suggest: Do not do that.
+ 
 
 For more advanced usage, for instance to change the name of the ``MasterTree``
 (see :doc:`root_trees` to learn what that is), construct an 
