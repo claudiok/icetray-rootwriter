@@ -19,16 +19,16 @@
 #include <map>
 #include <string>
 
-
 I3_FORWARD_DECLARATION(I3TableRow);
 
 struct I3Datatype;
 class TBranch;
 class TTree;
 
-
 class I3ROOTBranchWrapperEnum : public I3ROOTBranchWrapper {
-public:
+  friend class OnlyForTest;
+
+ public:
   I3ROOTBranchWrapperEnum();
   I3ROOTBranchWrapperEnum(TTree *tree, const I3Datatype &type, const std::string &branchname,
 			  const std::string &docstring, unsigned int index, size_t arrayLength = 1,
@@ -40,15 +40,15 @@ public:
 
   typedef void (I3ROOTBranchWrapperEnum::*FillFn)(const I3TableRowConstPtr&);
 
-private:
+ private:
   boost::shared_ptr<std::string> data_;
   std::map<long, std::string> mapping_;
-
+  
   template <typename T>
-  void FillImp(const I3TableRowConstPtr &data);
-
+    void FillImp(const I3TableRowConstPtr &data);
+  
   FillFn selectFillImp(const I3Datatype &type);
-
+  
   FillFn fillImp_;
 };
 
