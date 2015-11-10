@@ -32,10 +32,20 @@ TEST(I3ROOTBranchWrapperEnum_Constructors_Test)
   I3ROOTBranchWrapperEnumPtr ctor_wrappeenur
     (new I3ROOTBranchWrapperEnum(tree, i3intdatatype, branchname, 
 				 docstring, index, arraylength)); 
+  ENSURE(ctor_wrappeenur!=NULL, 
+	 "The constructor I3ROOTBranchWrapperEnum is NULL");
   
-  I3ROOTBranchWrapperEnumPtr ctor_wrappeenur_cp(ctor_wrappeenur);
+  I3ROOTBranchWrapperEnumPtr default_ctor(new I3ROOTBranchWrapperEnum());
+  ENSURE(default_ctor!=NULL,
+	 "Testing default ctor I3ROOTBranchWrapperEnum ");
 
-  ENSURE(ctor_wrappeenur==ctor_wrappeenur_cp,
+  I3ROOTBranchWrapperEnumPtr copy_ctor
+    (new I3ROOTBranchWrapperEnum(*ctor_wrappeenur));
+  ENSURE(copy_ctor!=NULL,
+	 "Testing default copy ctor I3ROOTBranchWrapperEnum");
+
+  I3ROOTBranchWrapperEnumPtr ctor_wrappeenur_cp2(ctor_wrappeenur);
+  ENSURE(ctor_wrappeenur==ctor_wrappeenur_cp2,
 	 "copy for ctor I3ROOTBranchWrapperEnum does not match");
 }
 
@@ -152,21 +162,21 @@ TEST(I3ROOTBranchWrapperEnum_selectFillImp_Test)
      Test for int8_t type::
   */
 
-  I3Datatype i3intdatatype = I3DatatypeFromNativeType<int8_t>();
+  I3Datatype i3int8datatype = I3DatatypeFromNativeType<int8_t>();
   I3ROOTBranchWrapperEnumPtr ctor_wrappeenur
-    (new I3ROOTBranchWrapperEnum(tree, i3intdatatype, 
+    (new I3ROOTBranchWrapperEnum(tree, i3int8datatype, 
 				 branchname, 
 				 docstring, 
 				 index, arraylength));
                                                       
   boost::shared_ptr<OnlyForTest> onlyfortest(new OnlyForTest(ctor_wrappeenur));
   I3ROOTBranchWrapperEnum::FillFn fillfn= 
-    onlyfortest->GetForTestselectFillImp(i3intdatatype);
+    onlyfortest->GetForTestselectFillImp(i3int8datatype);
    
-  ENSURE_EQUAL(i3intdatatype.size,sizeof(int8_t), 
+  ENSURE_EQUAL(i3int8datatype.size,sizeof(int8_t), 
 	       "I3Datatype has wrong size");
   
-  ENSURE_EQUAL(i3intdatatype.is_signed, true, 
+  ENSURE_EQUAL(i3int8datatype.is_signed, true, 
 	       "I3Datatype is not signed");
   /**
      We need to use I3TableRowConstPtr for 
@@ -197,12 +207,13 @@ TEST(I3ROOTBranchWrapperEnum_selectFillImp_Test)
 	 "The Constructor is Null");
   ENSURE_EQUAL(onlyfortest,onlyfortest_cp,
 	       "Copy of OnlyForParticle does not match");
-  ENSURE_EQUAL(onlyfortest->GetForTestselectFillImp(i3intdatatype),
-	       onlyfortest_cp->GetForTestselectFillImp(i3intdatatype),
+  ENSURE_EQUAL(onlyfortest->GetForTestselectFillImp(i3int8datatype),
+	       onlyfortest_cp->GetForTestselectFillImp(i3int8datatype),
 	       "Copy of OnlyForParticle::GetForTestselectFillImp  does not match");
   
 
   writer_service->Finish();
+  
 }
 
 
