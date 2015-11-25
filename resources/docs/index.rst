@@ -49,7 +49,7 @@ parameter for the output file name::
 * Output: The output root file.
 * Keys: This list has to contain all the objects that you want to book.
 * BookEverything: This is another parameter that you can pass it to I3ROOTWriter. Default is False, 
-if you set it as True, you would book everything creating a very large file. We would suggest: Do not do that.
+  if you set it as True, you would book everything creating a very large file. We would suggest: Do not do that.
  
 
 For more advanced usage, for instance to change the name of the ``MasterTree``
