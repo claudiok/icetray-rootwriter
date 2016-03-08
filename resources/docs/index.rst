@@ -10,6 +10,8 @@
 
 .. highlight:: pycon
 
+.. _rootwriter:
+
 rootwriter
 ==========
 
