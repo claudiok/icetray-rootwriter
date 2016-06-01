@@ -14,7 +14,7 @@ if(ROOT_FOUND)
   
     USE_TOOLS boost root python
     # add all the projects needed, in particular those needed by the converters
-    USE_PROJECTS icetray dataio dataclasses tableio)
+    USE_PROJECTS serialization icetray dataio dataclasses tableio)
 
   i3_add_pybindings(rootwriter
     private/pybindings/I3ROOTTableService.cxx
