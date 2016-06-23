@@ -12,6 +12,7 @@
 
 #include <I3Test.h>
 #include <limits.h>
+#include <boost/filesystem.hpp>
 
 #include <tableio/I3TableRow.h>
 #include <tableio/I3TableRowDescription.h>
@@ -166,4 +167,6 @@ TEST(resurrection) {
   }
 
   file.Close();
+
+  boost::filesystem::remove(filename);
 }
